@@ -26,7 +26,7 @@ UserSchema.pre("save", function (next) {
 
 UserSchema.methods.usernameExist = async function (username) {
   const result = await Mongoose.model("User").findOne({ username });
-  return result > 0;
+  return result.length > 0;
 };
 
 UserSchema.methods.isCorrectPassword = async function (password, hash) {
