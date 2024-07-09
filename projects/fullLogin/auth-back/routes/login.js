@@ -1,5 +1,6 @@
+const express = require("express");
+const User = require("../schema/user");
 const { jsonResponse } = require("../lib/jsonResponse");
-const router = require("express").Router();
 
 router.post("/", (req, res) => {
   const { username, password } = req.body;
