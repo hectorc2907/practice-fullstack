@@ -1,26 +1,44 @@
 const express = require("express");
 const User = require("../schema/user");
 const { jsonResponse } = require("../lib/jsonResponse");
+const getUserInfo = require("../lib/getUserInfo");
+const router = express.Router();
 
-router.post("/", (req, res) => {
+router.post("/", async function (req, res) {
   const { username, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).json(
-      jsonResponse(400, {
-        error: "Fields are required",
-      })
-    );
+  try {
+    let user = new User();
+    const userExists = await user.userExists(username);
+    if (userExists) {
+      user = await User.findOne({ username: username });
+      const passwordCorrect = await user.isCorrectPassword(
+        password,
+        user.password
+      );
+      if (passwordCorrect) {
+        return res.json(
+          jsonResponse(200, {
+            user: getUserInfo(user),
+          })
+        );
+      } else {
+        return res.status(401).json(
+          jsonResponse(401, {
+            error: "Username or Password incorrect",
+          })
+        );
+      }
+    } else {
+      return res.status(401).json(
+        jsonResponse(401, {
+          error: " Username does not exist",
+        })
+      );
+    }
+  } catch (error) {
+    console.log(error);
   }
-
-  const accessToken = "access_token";
-  const resfreshToken = "refresh_token";
-  const user = {
-    id: "1",
-    name: "John Doe",
-    username: "XXXXXXX",
-  };
-  res.status(200).json(jsonResponse(200, { user, accessToken, resfreshToken }));
 });
 
 module.exports = router;
