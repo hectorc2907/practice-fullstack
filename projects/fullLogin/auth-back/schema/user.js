@@ -41,7 +41,7 @@ UserSchema.methods.createAccessToken = function () {
   return generateAccessToken(getUserInfo(this));
 };
 
-UserSchema.methods.createRefrshToken = function () {
+UserSchema.methods.createRefreshToken = function () {
   const refreshToken = generateRefreshToken(getUserInfo(this));
   console.error("refreshToken", refreshToken);
   try {
