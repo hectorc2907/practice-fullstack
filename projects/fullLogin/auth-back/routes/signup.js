@@ -15,7 +15,7 @@ router.post("/", async function (req, res) {
   }
   try {
     const user = new User();
-    const exists = await user.usernameExists(username);
+    const exists = await user.usernameExist(username);
     if (exists) {
       return res.status(409).json(
         jsonResponse(409, {
