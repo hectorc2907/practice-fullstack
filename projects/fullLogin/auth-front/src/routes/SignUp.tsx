@@ -9,6 +9,7 @@ export function SignUp() {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorResponse, setErrorResponse] = useState("");
   const auth = useAuth();
 
   async function handleSumit(e: React.FormEvent<HTMLFormElement>) {
