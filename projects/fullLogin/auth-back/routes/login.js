@@ -4,7 +4,7 @@ const { jsonResponse } = require("../lib/jsonResponse");
 const getUserInfo = require("../lib/getUserInfo");
 const router = express.Router();
 
-router.post("/", async function (req, res) {
+router.post("/", async function (req, res, next) {
   const { username, password } = req.body;
 
   try {
@@ -17,6 +17,9 @@ router.post("/", async function (req, res) {
         user.password
       );
       if (passwordCorrect) {
+        const accessToken = user.createAccessToken();
+        const refreshToken = user.createRefreshToken();
+        console.log({ accessToken, refreshToken });
         return res.json(
           jsonResponse(200, {
             user: getUserInfo(user),
