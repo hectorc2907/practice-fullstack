@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { DefaultLayout } from "../layout/DefaultLayout";
 import { useAuth } from "../auth/AuthProvider";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { AuthResponse, AuthResponseError } from "../types/types";
 
 const backend = import.meta.env.VITE_API_URL;
 
@@ -11,6 +12,7 @@ export function SignUp() {
   const [password, setPassword] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
   const auth = useAuth();
+  const goTo = useNavigate();
 
   async function handleSumit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -23,9 +25,15 @@ export function SignUp() {
         body: JSON.stringify({ name, username, password }),
       });
       if (response.ok) {
-        console.log("User created successfully");
+        const json = (await response.json()) as AuthResponse;
+        console.log(json);
+        setName("");
+        setUsername("");
+        setPassword("");
+        goTo("/");
       } else {
-        console.log("Something went wrong");
+        const json = (await response.json()) as AuthResponseError;
+        setErrorResponse(json.body.error);
       }
     } catch (error) {
       console.log(error);
@@ -39,6 +47,7 @@ export function SignUp() {
     <DefaultLayout>
       <form className="form" onSubmit={handleSumit}>
         <h1>SignUp</h1>
+        {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
         <label>Name</label>
         <input
           type="text"
