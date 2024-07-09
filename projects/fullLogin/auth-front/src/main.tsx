@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Login } from "./routes/Login.tsx";
 import { SignUp } from "./routes/SignUp.tsx";
 import { Dashboard } from "./routes/Dashboard.tsx";
+import { ProtectedRoute } from "./routes/ProtectedRoute.tsx";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +17,9 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
+    path: "/",
+    element: <ProtectedRoute />,
+    children: [{ path: "/dashboard", element: <Dashboard /> }],
   },
 ]);
 
