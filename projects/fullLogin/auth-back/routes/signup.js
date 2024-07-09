@@ -19,7 +19,7 @@ router.post("/", async function (req, res) {
     if (exists) {
       return res.status(409).json(
         jsonResponse(409, {
-          error: "username already exists",
+          error: "Username already exists",
         })
       );
     } else {
