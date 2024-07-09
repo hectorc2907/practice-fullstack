@@ -9,6 +9,13 @@ const port = process.env.PORT || 3100;
 app.use(cors());
 app.use(express.json());
 
+main().catch((err) => console.log(err));
+
+async function main() {
+  await mongoose.connect(process.env.MONGODB_URI);
+  console.log("Conectado a la base de datos");
+}
+
 app.use("/api/signup", require("./routes/signup"));
 app.use("/api/login", require("./routes/login"));
 app.use("/api/user", require("./routes/user"));
