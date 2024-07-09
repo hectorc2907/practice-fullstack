@@ -1,8 +1,8 @@
-const { jsonResponse } = require("../lib/jsonResponse");
-
 const router = require("express").Router();
+const { jsonResponse } = require("../lib/jsonResponse");
+const User = require("../schema/user");
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const { username, name, password } = req.body;
 
   if (!username || !name || !password) {
@@ -13,6 +13,12 @@ router.post("/", (req, res) => {
     );
   }
 
+  const user = new User({
+    username,
+    name,
+    password,
+  });
+  await user.save();
   res
     .status(200)
     .json(jsonResponse(200, { message: "User created successfully" }));

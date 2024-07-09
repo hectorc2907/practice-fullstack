@@ -1,4 +1,4 @@
-const { Mongoose } = require("mongoose");
+const Mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const UserSchema = new Mongoose.Schema({
@@ -23,3 +23,5 @@ UserSchema.pre("save", function (next) {
     next();
   }
 });
+
+module.exports = Mongoose.model("User", UserSchema);
