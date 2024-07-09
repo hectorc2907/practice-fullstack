@@ -51,6 +51,7 @@ export function SignUp() {
         <label>Name</label>
         <input
           type="text"
+          name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -58,6 +59,7 @@ export function SignUp() {
         <label>Username</label>
         <input
           type="text"
+          name="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -65,6 +67,7 @@ export function SignUp() {
         <label>Password</label>
         <input
           type="password"
+          name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
