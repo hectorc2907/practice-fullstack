@@ -36,9 +36,9 @@ export function Login() {
         const json = (await response.json()) as AuthResponse;
         console.log(json);
 
-        // if (json.body.accessToken && json.body.refreshToken) {
-        //   auth.saveUser(json);
-        // }
+        if (json.body.accessToken && json.body.refreshToken) {
+          auth.saveUser(json);
+        }
       } else {
         const json = (await response.json()) as AuthResponseError;
         setErrorResponse(json.body.error);
