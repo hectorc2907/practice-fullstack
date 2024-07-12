@@ -5,7 +5,19 @@ export const getTasks = async (req, res) => {
   res.json(tasks);
 };
 
-export const createTask = async (req, res) => {};
+export const createTask = async (req, res) => {
+  const { title, description, date } = req.body;
+
+  const newTask = new Task({
+    title,
+    description,
+    date,
+  });
+
+  const savedTask = await newTask.save();
+
+  res.json(savedTask);
+};
 
 export const getTask = async (req, res) => {};
 
