@@ -13,6 +13,8 @@ export const register = async (req, res) => {
       id: userSaved._id,
       username: userSaved.username,
       email: userSaved.email,
+      createAt: userSaved.createdAt,
+      updateAt: userSaved.updatedAt,
     });
   } catch (error) {
     console.error(error);
