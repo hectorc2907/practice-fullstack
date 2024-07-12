@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const signup = async (user) => {
     try {
@@ -59,13 +60,17 @@ export const AuthProvider = ({ children }) => {
         try {
           const res = await verifyTokenRequest(cookies.token);
           if (!res.data) {
-            return setIsAuthenticated(false);
+            setIsAuthenticated(false);
+            setLoading(false);
+            return;
           }
           setIsAuthenticated(true);
           setUser(res.data);
+          setLoading(false);
         } catch (error) {
           setIsAuthenticated(false);
           setUser(null);
+          setLoading(false);
         }
       }
     }
@@ -73,7 +78,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
   return (
     <AuthContext.Provider
-      value={{ signup, signin, user, isAuthenticated, errors }}
+      value={{ signup, signin, loading, user, isAuthenticated, errors }}
     >
       {children}
     </AuthContext.Provider>
