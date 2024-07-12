@@ -5,8 +5,8 @@ export const register = async (req, res) => {
 
   try {
     const newUser = new User({ username, email, password });
-    await newUser.save();
-    res.send("registrando");
+    const userSaved = await newUser.save();
+    res.json(userSaved);
   } catch (error) {
     console.error(error);
   }
