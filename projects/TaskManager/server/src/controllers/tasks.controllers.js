@@ -27,6 +27,20 @@ export const getTask = async (req, res) => {
   res.json(task);
 };
 
-export const deleteTask = async (req, res) => {};
+export const deleteTask = async (req, res) => {
+  const task = await Task.findByIdAndDelete(req.params.id);
 
-export const updateTask = async (req, res) => {};
+  if (!task) return res.status(404).json({ message: "Task not found" });
+
+  res.json(task);
+};
+
+export const updateTask = async (req, res) => {
+  const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+
+  if (!task) return res.status(404).json({ message: "Task not found" });
+
+  res.json(task);
+};
