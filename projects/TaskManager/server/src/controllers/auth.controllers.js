@@ -18,7 +18,8 @@ export const register = async (req, res) => {
       { expiresIn: "1d" },
       (error, token) => {
         if (error) console.error(error);
-        res.json({ token });
+        res.cookie("token", token);
+        res.json({ message: "User created successfully" });
       }
     );
 
