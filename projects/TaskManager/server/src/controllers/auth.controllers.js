@@ -21,7 +21,7 @@ export const register = async (req, res) => {
       updateAt: userSaved.updatedAt,
     });
   } catch (error) {
-    return status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 export const login = (req, res) => {
