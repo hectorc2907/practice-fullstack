@@ -1,5 +1,8 @@
+import User from "../models/user.mode.js";
+
 export const register = (req, res) => {
-  console.log(req.body);
+  const { email, username, password } = req.body;
+  new User({ username, email, password });
 };
 export const login = (req, res) => {
   res.send("login");
