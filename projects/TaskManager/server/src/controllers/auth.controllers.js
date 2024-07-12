@@ -9,7 +9,11 @@ export const register = async (req, res) => {
 
     const newUser = new User({ username, email, password: passwordHash });
     const userSaved = await newUser.save();
-    res.json(userSaved);
+    res.json({
+      id: userSaved._id,
+      username: userSaved.username,
+      email: userSaved.email,
+    });
   } catch (error) {
     console.error(error);
   }
