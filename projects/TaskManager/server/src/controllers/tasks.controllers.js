@@ -21,11 +21,15 @@ export const createTask = async (req, res) => {
 };
 
 export const getTask = async (req, res) => {
-  const task = await Task.findById(req.params.id).populate("user");
+  try {
+    const task = await Task.findById(req.params.id).populate("user");
 
-  if (!task) return res.status(404).json({ message: "Task not found" });
+    if (!task) return res.status(404).json({ message: "Task not found" });
 
-  res.json(task);
+    res.json(task);
+  } catch (error) {
+    return res.status(404).json({ message: "Task not found" });
+  }
 };
 
 export const deleteTask = async (req, res) => {
