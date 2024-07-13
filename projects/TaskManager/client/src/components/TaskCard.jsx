@@ -1,10 +1,12 @@
 function TaskCard({ task }) {
   return (
     <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
-      <h1 className="text-2xl font-bold">{task.title}</h1>
-      <div>
-        <button>update</button>
-        <button>delete</button>
+      <div className="flex justify-between">
+        <h1 className="text-2xl font-bold">{task.title}</h1>
+        <div className="flex gap-x-2 items-center">
+          <button>update</button>
+          <button>delete</button>
+        </div>
       </div>
       <p className="text-slate-300">{task.description}</p>
       <p>{new Date(task.date).toLocaleDateString()}</p>
