@@ -1,4 +1,7 @@
+import { useTasks } from "../context/TasksContext";
+
 function TaskCard({ task }) {
+  const { deleteTask } = useTasks();
   return (
     <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
       <div className="flex justify-between">
@@ -7,7 +10,7 @@ function TaskCard({ task }) {
           <button>update</button>
           <button
             onClick={() => {
-              console.log(task._id);
+              deleteTask(task._id);
             }}
           >
             delete
