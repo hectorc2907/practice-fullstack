@@ -4,10 +4,9 @@ import { useTasks } from "../context/TasksContext";
 function TaskFormPage() {
   const { register, handleSubmit } = useForm();
   const { createTask } = useTasks();
-  console.log(createTask());
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    createTask(data);
   });
   return (
     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
