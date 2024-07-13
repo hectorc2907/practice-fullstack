@@ -11,11 +11,17 @@ function TaskCard({ task }) {
       <div className="flex justify-between">
         <h1 className="text-2xl font-bold">{task.title}</h1>
         <div className="flex gap-x-2 items-center">
-          <Link to={`/tasks/${task._id}`}>update</Link>
+          <Link
+            to={`/tasks/${task._id}`}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
+          >
+            update
+          </Link>
           <button
             onClick={() => {
               deleteTask(task._id);
             }}
+            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"
           >
             delete
           </button>
