@@ -1,7 +1,13 @@
-const Navbar = () => {
-  return (
-    <div>Navbar</div>
-  )
-}
+import { NavLink } from "react-router-dom";
 
-export default Navbar
+const Navbar = ({ containerStyles }) => {
+  return (
+    <nav className={`${containerStyles}`}>
+      <NavLink>
+        <div>Home</div>
+      </NavLink>
+    </nav>
+  );
+};
+
+export default Navbar;
