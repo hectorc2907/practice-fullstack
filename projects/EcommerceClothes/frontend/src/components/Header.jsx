@@ -7,7 +7,7 @@ const Header = () => {
       <div>
         <div>
           <Link>
-            <img src={logo} alt="" />
+            <img src={logo} alt="" height={66} width={66} />
           </Link>
         </div>
       </div>
